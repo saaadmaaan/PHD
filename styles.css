@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('micky.png'); /* Updated path */
+    background-image: url('/micky.png'); /* Updated path */
     background-size: cover;
     background-position: center;
     font-family: Arial, sans-serif;
