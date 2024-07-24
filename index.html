@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <iframe src="audio/source.mp3" allow="autoplay" style="display:none" id="iframeAudio">
-</iframe>
-<audio autoplay loop  id="playAudio">
-    <source src="background-music.mp3">
-</audio>
-<script>
-   var audio = document.getElementById('playAudio');
+   <iframe src="audio/source.mp3" allow="autoplay" style="display:none" id="iframeAudio"></iframe>
+    <audio id="playAudio" loop>
+        <source src="background-music.mp3">
+    </audio>
+    <div class="content">
+        <h1>Welcome to the Music Player</h1>
+        <button id="playButton" onclick="togglePlay()">Play</button>
+    </div>
+    <script>
+        var audio = document.getElementById('playAudio');
         var button = document.getElementById('playButton');
 
         function togglePlay() {
@@ -32,7 +35,7 @@
         } else {
             document.getElementById('playAudio').remove(); // just to make sure that it will not have 2x audio in the background
         }
-</script>
+    </script>
 
 </body>
 </html>
