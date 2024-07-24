@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUCK YOU</title>
+    <title>Audio Player</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,7 +11,10 @@
     <audio id="playAudio" loop>
         <source src="background-music.mp3">
     </audio>
-    <button id="playButton" onclick="togglePlay()">Play</button>
+    <div class="content">
+        <h1>Welcome to the Music Player</h1>
+        <button id="playButton" onclick="togglePlay()">Play</button>
+    </div>
     <script>
         var audio = document.getElementById('playAudio');
         var button = document.getElementById('playButton');
