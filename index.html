@@ -12,8 +12,7 @@
         <source src="background-music.mp3">
     </audio>
     <div class="content">
-        <h1>Welcome to the Music Player</h1>
-        <button id="playButton" onclick="togglePlay()">Play</button>
+        <button id="playButton" onclick="togglePlay()">▶</button>
     </div>
     <script>
         var audio = document.getElementById('playAudio');
@@ -22,10 +21,10 @@
         function togglePlay() {
             if (audio.paused) {
                 audio.play();
-                button.textContent = 'Pause';
+                button.textContent = '⏸'; // Pause icon
             } else {
                 audio.pause();
-                button.textContent = 'Play';
+                button.textContent = '▶'; // Play icon
             }
         }
 
