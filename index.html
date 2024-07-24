@@ -7,33 +7,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <iframe src="audio/source.mp3" allow="autoplay" style="display:none" id="iframeAudio"></iframe>
     <audio id="playAudio" loop>
         <source src="background-music.mp3">
     </audio>
-    <div class="content">
-        <button id="playButton" onclick="togglePlay()">▶</button>
+    <div id="playButtonOverlay" class="overlay" onclick="playAudio()">
+        <div class="play-button">▶</div>
     </div>
     <script>
         var audio = document.getElementById('playAudio');
-        var button = document.getElementById('playButton');
+        var overlay = document.getElementById('playButtonOverlay');
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                button.textContent = '⏸'; // Pause icon
-            } else {
-                audio.pause();
-                button.textContent = '▶'; // Play icon
-            }
+        function playAudio() {
+            audio.play().then(() => {
+                overlay.style.display = 'none'; // Hide the overlay after audio starts
+            }).catch(error => {
+                console.error('Autoplay prevented:', error);
+            });
         }
 
-        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        if (!isChrome) {
-            document.getElementById('iframeAudio').remove();
-        } else {
-            document.getElementById('playAudio').remove(); // just to make sure that it will not have 2x audio in the background
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to autoplay audio on page load
+            audio.play().then(() => {
+                overlay.style.display = 'none'; // Hide the overlay if autoplay is successful
+            }).catch(error => {
+                console.log('Autoplay prevented:', error);
+                // Display the overlay if autoplay fails
+                overlay.style.display = 'flex';
+            });
+        });
     </script>
 </body>
 </html>
