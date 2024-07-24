@@ -13,14 +13,25 @@
     <source src="background-music.mp3">
 </audio>
 <script>
-    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-  if (!isChrome){
-      $('#iframeAudio').remove()
-  }
-  else {
-      $('#playAudio').remove() // just to make sure that it will not have 2x audio in the background 
-  }
+   var audio = document.getElementById('playAudio');
+        var button = document.getElementById('playButton');
 
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                button.textContent = 'Pause';
+            } else {
+                audio.pause();
+                button.textContent = 'Play';
+            }
+        }
+
+        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        if (!isChrome) {
+            document.getElementById('iframeAudio').remove();
+        } else {
+            document.getElementById('playAudio').remove(); // just to make sure that it will not have 2x audio in the background
+        }
 </script>
 
 </body>
