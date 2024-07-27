@@ -1,60 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+// Selecting elements
+const playButton = document.getElementById('playButton');
+const backgroundVideo = document.getElementById('backgroundVideo');
+const backgroundMusic = document.getElementById('backgroundMusic');
+const helloText = document.getElementById('helloText');
 
-body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+let audioContext, analyser, dataArray;
+let textAngle = 0;
+
+// Function to start the music and animations
+function startMusic() {
+    setupAudioContext();
+    backgroundMusic.play().then(() => {
+        console.log("Music started");
+        backgroundVideo.play(); // Ensure video plays
+        playButton.style.display = 'none';
+        helloText.style.display = 'block'; // Show text when music starts
+        animate();
+    }).catch(error => {
+        console.error("Error playing music:", error);
+        playButton.style.display = 'flex'; // Show play button if autoplay fails
+    });
 }
 
-#backgroundVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* Ensure the video is behind other elements */
+// Setup Web Audio API
+function setupAudioContext() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaElementSource(backgroundMusic);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+        analyser.fftSize = 256;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+    }
 }
 
-#playButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
+// Function to get the audio frequency data
+function getAudioData() {
+    analyser.getByteFrequencyData(dataArray);
+    let sum = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+        sum += dataArray[i];
+    }
+    return sum / dataArray.length;
 }
 
-#helloText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 5vw;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    color: #00ff99;
-    display: none; /* Initially hidden, shown only when music starts */
-    transition: transform 0.1s linear;
+// Spinning text animation
+function animateText() {
+    const audioData = getAudioData();
+    textAngle += 0.02; // Adjust the rotation speed
+
+    // Update text rotation
+    helloText.style.transform = `translate(-50%, -50%) rotate(${textAngle}rad)`;
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Make sure the canvas does not interfere with play button */
+// Main animation loop
+function animate() {
+    animateText();
+    requestAnimationFrame(animate);
 }
+
+// Try to autoplay music
+startMusic();
+
+// Event listener for the play button
+playButton.addEventListener('click', () => {
+    console.log('Play button clicked');
+    setupAudioContext();
+    // Resuming AudioContext is required due to some browser's autoplay policies
+    if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            console.log('Audio context resumed');
+            startMusic();
+        });
+    } else {
+        startMusic();
+    }
+});
