@@ -84,6 +84,7 @@ animate();
 
 // Function to start the music and animations
 function startMusic() {
+    console.log('Attempting to start music');
     setupAudioContext();
     backgroundMusic.play().then(() => {
         console.log("Music started");
@@ -98,6 +99,7 @@ function startMusic() {
 
 // Setup Web Audio API
 function setupAudioContext() {
+    console.log('Setting up audio context');
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioContext.createAnalyser();
@@ -110,7 +112,7 @@ function setupAudioContext() {
 }
 
 // Try to autoplay music
-startMusic();
+document.addEventListener('DOMContentLoaded', startMusic);
 
 // Event listener for the play button
 playButton.addEventListener('click', () => {
