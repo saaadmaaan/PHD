@@ -27,22 +27,17 @@ function startMusic() {
     });
 }
 
-// Function to stop the music and hide the text
-function stopMusic() {
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
-    helloText.style.display = 'none'; // Hide text when music stops
-}
-
 // Setup Web Audio API
 function setupAudioContext() {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioContext.createAnalyser();
-    const source = audioContext.createMediaElementSource(backgroundMusic);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-    analyser.fftSize = 256;
-    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaElementSource(backgroundMusic);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+        analyser.fftSize = 256;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+    }
 }
 
 // Function to get the audio frequency data
@@ -108,9 +103,12 @@ startMusic();
 
 // Event listener for the play button
 playButton.addEventListener('click', () => {
+    console.log('Play button clicked');
+    setupAudioContext();
     // Resuming AudioContext is required due to some browser's autoplay policies
     if (audioContext && audioContext.state === 'suspended') {
         audioContext.resume().then(() => {
+            console.log('Audio context resumed');
             startMusic();
         });
     } else {
