@@ -1,20 +1,20 @@
 // Selecting elements
 const playButton = document.getElementById('playButton');
+const backgroundVideo = document.getElementById('backgroundVideo');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const helloText = document.getElementById('helloText');
-const backgroundVideo = document.getElementById('backgroundVideo');
 
 let audioContext, analyser, dataArray;
 let textAngle = 0;
 
 // Function to start the music and animations
-function startMusicAndVideo() {
+function startMusic() {
     setupAudioContext();
     backgroundMusic.play().then(() => {
         console.log("Music started");
+        backgroundVideo.play(); // Ensure video plays
         playButton.style.display = 'none';
         helloText.style.display = 'block'; // Show text when music starts
-        backgroundVideo.play(); // Start the background video
         animate();
     }).catch(error => {
         console.error("Error playing music:", error);
@@ -60,8 +60,8 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Try to autoplay music and video
-startMusicAndVideo();
+// Try to autoplay music
+startMusic();
 
 // Event listener for the play button
 playButton.addEventListener('click', () => {
@@ -71,9 +71,9 @@ playButton.addEventListener('click', () => {
     if (audioContext && audioContext.state === 'suspended') {
         audioContext.resume().then(() => {
             console.log('Audio context resumed');
-            startMusicAndVideo();
+            startMusic();
         });
     } else {
-        startMusicAndVideo();
+        startMusic();
     }
 });
