@@ -12,8 +12,8 @@ const texts = [
     "You"
 ];
 
-const morphTime = 1;
-const cooldownTime = 0.25;
+const morphTime = 5; // Increase morph time to slow down the effect
+const cooldownTime = 0.5;
 
 let textIndex = texts.length - 1;
 let time = new Date();
@@ -90,7 +90,7 @@ function startMusic() {
         console.log("Music started");
         backgroundVideo.play(); // Ensure video plays
         playButton.style.display = 'none';
-        document.getElementById('container').style.display = 'flex'; // Show text container when music starts
+        document.getElementById('container').style.display = 'block'; // Show text container when music starts
     }).catch(error => {
         console.error("Error playing music:", error);
         playButton.style.display = 'flex'; // Show play button if autoplay fails
@@ -98,6 +98,8 @@ function startMusic() {
 }
 
 // Setup Web Audio API
+let audioContext, analyser, dataArray;
+
 function setupAudioContext() {
     console.log('Setting up audio context');
     if (!audioContext) {
@@ -112,7 +114,10 @@ function setupAudioContext() {
 }
 
 // Try to autoplay music
-document.addEventListener('DOMContentLoaded', startMusic);
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM content loaded, trying to start music');
+    startMusic();
+});
 
 // Event listener for the play button
 playButton.addEventListener('click', () => {
