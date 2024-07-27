@@ -8,6 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    background: black;
 }
 
 #backgroundVideo {
