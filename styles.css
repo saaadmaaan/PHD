@@ -51,7 +51,19 @@ body {
     font-weight: bold;
     color: #00ff99;
     display: none; /* Initially hidden, shown only when music starts */
-    transition: transform 0.1s linear;
+    animation: morphingText 3s infinite;
+}
+
+@keyframes morphingText {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 canvas {
