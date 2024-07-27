@@ -2,19 +2,14 @@
 const playButton = document.getElementById('playButton');
 const backgroundVideo = document.getElementById('backgroundVideo');
 const backgroundMusic = document.getElementById('backgroundMusic');
-const helloText = document.getElementById('helloText');
-
-let audioContext, analyser, dataArray;
-
 const elts = {
-    text1: document.getElementById("text1"),
-    text2: document.getElementById("text2")
+    text1: document.getElementById('text1'),
+    text2: document.getElementById('text2')
 };
 
 const texts = [
     "Fuck",
     "You"
-    
 ];
 
 const morphTime = 1;
@@ -94,7 +89,7 @@ function startMusic() {
         console.log("Music started");
         backgroundVideo.play(); // Ensure video plays
         playButton.style.display = 'none';
-        helloText.style.display = 'block'; // Show text when music starts
+        document.getElementById('container').style.display = 'flex'; // Show text container when music starts
     }).catch(error => {
         console.error("Error playing music:", error);
         playButton.style.display = 'flex'; // Show play button if autoplay fails
