@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <video id="backgroundVideo" autoplay loop muted playsinline>
-        <source src="background-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <video id="backgroundVideo" autoplay loop muted playsinline preload="auto">
+    <source src="background-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
     <div id="playButton">▶</div>
     <div id="helloText">Fuck You</div>
     <canvas id="waveCanvas"></canvas>
