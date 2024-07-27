@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="container">
+    <span id="text1"></span>
+    <span id="text2"></span>
+</div>
+
+<svg id="filters">
+    <defs>
+        <filter id="threshold">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 255 -140" />
+        </filter>
+    </defs>
+</svg>
     <video id="backgroundVideo" autoplay loop muted playsinline preload="auto">
         <source src="background-video-compressed.mp4" type="video/mp4">
         <source src="background-video.webm" type="video/webm">
