@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
 body {
     margin: 0;
     height: 100vh;
@@ -20,13 +22,12 @@ body {
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 1.5em;
+    font-size: 3em;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
-    display: none; /* Initially hidden, shown only if autoplay fails */
 }
 
 #helloText {
@@ -34,8 +35,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3vw;
+    font-size: 5vw;
     font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
     color: #00ff99;
     display: none; /* Initially hidden, shown only when music starts */
     transition: transform 0.1s linear;
