@@ -27,13 +27,6 @@ function startMusic() {
     });
 }
 
-// Function to stop the music and hide the text
-function stopMusic() {
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
-    helloText.style.display = 'none'; // Hide text when music stops
-}
-
 // Setup Web Audio API
 function setupAudioContext() {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
