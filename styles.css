@@ -39,6 +39,7 @@ body {
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 10;
 }
 
 #container {
@@ -46,11 +47,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 5vw;
+    font-size: 10vw;
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
-    color: #00ff99;
-    display: flex;
+    color: black;
+    display: none;
 }
 
 #text1, #text2 {
