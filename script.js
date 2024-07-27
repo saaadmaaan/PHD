@@ -20,10 +20,10 @@ canvas.height = window.innerHeight;
 // Function to start the music and animations
 function startMusic() {
     console.log("Play button clicked");
+    setupAudioContext();
     backgroundMusic.play().then(() => {
         console.log("Music started");
         playButton.style.display = 'none';
-        setupAudioContext();
         animate();
     }).catch(error => {
         console.error("Error playing music:", error);
@@ -92,7 +92,16 @@ function animate() {
 }
 
 // Event listener for the play button
-playButton.addEventListener('click', startMusic);
+playButton.addEventListener('click', () => {
+    // Resuming AudioContext is required due to some browser's autoplay policies
+    if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            startMusic();
+        });
+    } else {
+        startMusic();
+    }
+});
 
 // Handle window resize
 window.addEventListener('resize', () => {
