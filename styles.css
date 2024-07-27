@@ -28,6 +28,7 @@ body {
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
+    display: none; /* Initially hidden, shown only if autoplay fails */
 }
 
 #helloText {
