@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#backgroundVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Ensure the video is behind other elements */
+}
+
+#playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#helloText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5vw;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: #00ff99;
+    display: none; /* Initially hidden, shown only when music starts */
+    transition: transform 0.1s linear;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Make sure the canvas does not interfere with play button */
+}
